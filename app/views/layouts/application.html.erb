@@ -24,6 +24,15 @@
   </head>
 
   <body class="m-0 p-0">
+    <% flash.each do |type, message| %>
+      <% next if message.blank? %>
+      <% next if devise_controller? %>
+      <% flash_class = type.to_s == "alert" ? "border-red-200 bg-red-50 text-red-700" : "border-green-200 bg-green-50 text-green-700" %>
+      <div class="mx-auto mt-4 w-[calc(100%-2rem)] max-w-xl rounded-md border p-4 text-sm <%= flash_class %>">
+        <p class="font-semibold"><%= message %></p>
+      </div>
+    <% end %>
+
     <main class="<%= devise_controller? ? '' : 'container mx-auto mt-28 flex px-5' %>">
       <%= yield %>
     </main>

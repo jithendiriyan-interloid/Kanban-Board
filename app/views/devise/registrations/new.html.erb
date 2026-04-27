@@ -1,10 +1,13 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
-  <div class="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
+<%# Create a new registration form for Devise with Tailwind CSS styling %>
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 ">
+  <div class="grid w-full max-w-5xl overflow-hidden bg-white shadow-md rounded-lg  lg:grid-cols-2 p-5">
+    <div class="p-10">
     <h3 class="text-2xl font-semibold text-gray-800 mb-2">
-      Create Account
+      Get started with your account
     </h3>
     <p class="text-gray-500 mb-6">
-      Start organizing your work with a new account
+      Please fill in the form to create an account
     </p>
 
     <h2 class="text-xl font-bold text-gray-700 mb-4">Sign up</h2>
@@ -12,17 +15,16 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full" }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
+<%# Add email field with Tailwind CSS styling %>
       <div class="mb-4">
         <%= f.label :email, class: "block text-sm font-medium text-gray-600 mb-1" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:outline-none", placeholder: "Email" %>
       </div>
-
+      
+<%# Add password and password confirmation fields with Tailwind CSS styling %>
       <div class="mb-4">
-        <div class="flex items-center justify-between gap-3 mb-1">
+        <div class="flex items-center justify-between  mb-1">
           <%= f.label :password, class: "block text-sm font-medium text-gray-600" %>
-          <% if @minimum_password_length %>
-            <span class="text-xs text-gray-400"><%= @minimum_password_length %> characters minimum</span>
-          <% end %>
         </div>
         <%= f.password_field :password, autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:outline-none", placeholder: "Password" %>
       </div>
@@ -31,17 +33,21 @@
         <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-600 mb-1" %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:outline-none", placeholder: "Confirm password" %>
       </div>
-
       <div class="mb-6">
         <%= f.submit "Sign up", class: "w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200 font-semibold cursor-pointer" %>
       </div>
     <% end %>
 
+<%# Add a link to the login page for users who already have an account %>
     <div class="text-center">
       <p class="text-sm text-gray-500 mb-2"> or </p>
       <p class="text-sm text-gray-700">
         Already have an account? <%= link_to "Log in", new_session_path(resource_name), class: "text-blue-600 font-semibold hover:underline" %>
       </p>
+    </div>
+    </div>
+    <div class="hidden min-h-[520px] bg-blue-50 lg:block">
+      <%= image_tag "login_image.svg", alt: "Kanban board workspace", class: "h-full w-full object-cover" %>
     </div>
   </div>
 </div>

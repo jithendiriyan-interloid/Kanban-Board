@@ -1,0 +1,14 @@
+<div class="w-full">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">Kanban Board</h1>
+      <p class="mt-1 text-sm text-gray-500">Welcome, <%= current_user.email %></p>
+    </div>
+
+    <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800" %>
+  </div>
+
+  <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+    <p class="text-gray-600">You are logged in successfully.</p>
+  </div>
+</div>
