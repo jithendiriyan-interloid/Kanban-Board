@@ -1,5 +1,9 @@
-<% if resource.errors.any? %>
-  <div id="toas" class="mb-5 rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-700" data-turbo-temporary>
+<% if resource.present? && resource.errors.any? %>
+  <div id="toast-top-right"
+       class="fixed right-5 top-1 z-auto  w-80 max-w-[calc(100vw-2.5rem)] p-4 text-sm border-red-200 bg-red-50 text-red-700 rounded-lg shadow border transition-opacity duration-500"
+       role="alert"
+       data-controller="toast"
+       data-turbo-temporary>
     <h2 class="font-semibold text-red-800 mb-2">
       <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,
@@ -13,8 +17,3 @@
     </ul>
   </div>
 <% end %>
-<div id="toast-top-right"
-       class="fixed w-full max-w-xs p-4 text-sm border-red-200 bg-red-50 text-red-700 rounded-lg shadow border top-5 right-5 z-50 transition-opacity duration-500"
-       role="alert"
-       data-controller="toast"
-       data-turbo-temporary>

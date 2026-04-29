@@ -25,13 +25,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="m-0 p-0">
+  <body class="m-0 p-0"  data-controller="ui">
+    <% show_app_shell = !devise_controller? && user_signed_in? %>
+
     <% flash.each do |type, message| %>
       <% next if message.blank? %>
-      <% next if devise_controller? %>
+      <% next unless show_app_shell %>
       <% flash_class = type.to_s == "alert" ? "border-red-200 bg-red-50 text-red-700" : "border-green-200 bg-green-50 text-green-700" %>
       <div id="toast-top-right"
-           class="fixed flex items-center w-full max-w-xs p-4 text-sm <%= flash_class %> rounded-lg shadow border top-5 right-5 z-50 transition-opacity duration-500"
+           class="fixed right-5 top-24 z-[60] flex w-80 max-w-[calc(100vw-2.5rem)] items-center p-4 text-sm <%= flash_class %> rounded-lg shadow border transition-opacity duration-500"
            role="alert"
            data-controller="toast"
            data-turbo-temporary>
@@ -39,7 +41,12 @@
       </div>
     <% end %>
 
-    <main class="<%= devise_controller? ? '' : 'container mx-auto mt-28 flex px-5' %>">
+    <% if show_app_shell %>
+      <%= render "devise/shared/navbar" %>
+      <%= render "devise/shared/sidebar" %>
+    <% end %>
+
+    <main id="content" class="<%= show_app_shell ? 'container mx-auto mt-28 flex px-5 transition-all duration-300' : '' %>">
       <%= yield %>
     </main>
   </body>
