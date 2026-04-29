@@ -68,6 +68,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'rspec-rails', '~> 7.1'
+  gem 'factory_bot_rails', '~> 6.5'
 end
 
 gem "tailwindcss-rails", "~> 4.4"
@@ -78,3 +80,5 @@ gem 'devise', '~> 5.0', '>= 5.0.3'
 
 # For managing environment variables in development and production
 gem 'dotenv-rails'
+
+# for testing

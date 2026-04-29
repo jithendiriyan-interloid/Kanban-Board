@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@layer base {
+  input::placeholder {
+    font-size: 13px;
+  }
+}
+*{
+  font-family: 'Lato', sans-serif;
+}

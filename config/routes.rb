@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+  patch "profile", to: "users#update_profile", as: :profile
+  post "profile/skip", to: "users#skip_profile", as: :skip_profile
+  delete "profile", to: "users#soft_delete", as: :delete_profile
+
   root "users#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
