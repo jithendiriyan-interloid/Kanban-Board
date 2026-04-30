@@ -26,6 +26,10 @@ class User < ApplicationRecord
     },
     allow_blank: true
 
+  def display_name
+    [first_name, last_name].compact_blank.join(" ").presence || email
+  end
+
   def profile_complete?
     first_name.present? && last_name.present? && phone_number.present? && address.present? && alternate_email.present?
   end

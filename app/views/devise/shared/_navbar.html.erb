@@ -1,67 +1,60 @@
-<% display_name = [current_user&.first_name, current_user&.last_name].compact_blank.join(" ").presence || current_user&.email || "User" %>
-
 <nav class="fixed top-0 z-50 w-full bg-white shadow-sm">
-  <div class="flex items-center justify-between px-5 py-2">
-
+  <div class="flex items-center justify-between px-10 py-2">
+    <!-- Left -->
     <div class="flex items-center gap-3">
-      <button id="menuBtn" class="p-2 rounded-lg hover:bg-white dark:hover:bg--700">
+      <button id="menuBtn" class="p-2 rounded-lg hover:bg-gray-100">
         ☰
       </button>
-
       <span class="text-lg font-semibold">
         KanBan Board
       </span>
     </div>
-        <div class="relative">
-           <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"
-             fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
+    <!-- Search -->
+    <div class="relative w-2xl">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 "
+        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
       <input type="text" placeholder="Search..."
-          class="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg
-                  bg-white focus:outline-none focus:ring-2 focus:ring-blue-500
-                  focus:border-transparent" />
-        </div>
-    <div>
-    
-    </div>    
-    <div>
-    <button class="rounded-md bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition duration-200 cursor-pointer"> Create Task </button>
+        class="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-2xl
+        bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
     </div>
-
-
+    <!-- Right -->
     <div class="flex items-center gap-4">
-      <button id="themeToggle" class="p-2 rounded-lg ">
-        🌙
+      <button class="rounded-2xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+        Create 
       </button>
-
+      <button id="themeToggle" type="button" aria-label="Toggle theme"
+        class="group relative inline-flex h-7 w-12 items-center rounded-full bg-gray-200 p-1 transition-colors hover:bg-gray-300 focus:outline-none  focus:ring-offset-2">
+        <span class="sr-only">Toggle theme</span>
+        <span
+          class="inline-block h-5 w-5 rounded-full bg-white shadow transition-transform group-[.is-active]:translate-x-5">
+        </span>
+      </button>
+      <!-- Profile -->
       <div class="relative">
         <button id="profileBtn">
           <% if current_user&.avatar&.attached? %>
-            <%= image_tag current_user.avatar, alt: "Profile avatar", class: "w-8 h-8 rounded-full object-cover" %>
+            <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full object-cover" %>
           <% else %>
-            <%= image_tag "default_avatar.jpg", alt: "Profile avatar", class: "w-8 h-8 rounded-full object-cover" %>
+            <%= image_tag "default_avatar.jpg", class: "w-8 h-8 rounded-full object-cover" %>
           <% end %>
         </button>
-
         <div id="profileMenu"
-          class="hidden absolute right-0 mt-2 w-44 rounded-lg shadow-lg">
-
-          <div class="px-4 py-3 border-b dark:border-gray-700">
-            <p class="text-sm font-medium ">
-              <%= display_name %>
+          class="hidden absolute right-0 mt-2 w-44 rounded-lg shadow-lg bg-white border border-gray-200">
+          <div class="px-4 py-3 border-b">
+            <p class="text-sm font-medium">
+              <%= current_user&.display_name %>
             </p>
           </div>
-
-          <ul class="p-2 text-sm ">
-            <li><%= link_to "Profile", root_path, class: "block p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700" %></li>
-            <li><%= link_to "Settings", root_path(edit_profile: true), class: "block p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700" %></li>
-            <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "block p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700" %></li>
+          <ul class="p-2 text-sm">
+            <li><%= link_to "Profile", root_path, class: "block p-2 rounded hover:bg-gray-100" %></li>
+            <li><%= link_to "Settings", root_path(edit_profile: true), class: "block p-2 rounded hover:bg-gray-100" %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "block p-2 rounded hover:bg-gray-100" %></li>
           </ul>
-
         </div>
       </div>
-
     </div>
   </div>
 </nav>

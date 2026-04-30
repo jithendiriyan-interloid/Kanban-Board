@@ -1,8 +1,7 @@
 <div class="w-full">
   <div class="mb-6 flex items-center justify-between">
     <div>
-      <h1 class="text-2xl font-semibold text-gray-900">Kanban Board</h1>
-      <p class="mt-1 text-sm text-gray-500">Welcome, <%= current_user.email %></p>
+      <p class="mt-1 text-sm ">Welcome, <%= current_user.first_name %></p>
     </div>
 
   </div>
@@ -97,7 +96,6 @@
       <h2 class="text-xl font-bold text-gray-800 mb-2">Account status</h2>
       <div class="rounded-md  p-4">
         <h3 class="font-semibold  mb-1">Delete account</h3>
-        <p class="text-sm mb-4">This will delete your account and sign you out.</p>
         <%= button_to "Delete account", delete_profile_path, method: :delete, data: { turbo_confirm: "Are you sure you want to delete your account?" }, class: "rounded-md bg-red-700 px-4 py-2 text-sm font-semibold text-white hover:bg-red-800 cursor-pointer" %>
       </div>
     </div>

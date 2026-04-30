@@ -62,6 +62,7 @@ group :development do
   gem 'bullet', '~> 8.1', '>= 8.1.1'
   gem 'traceroute', '~> 0.8.1'
   gem 'rubycritic', '~> 5.0'
+  gem "htmlbeautifier"
 end
 
 group :test do
