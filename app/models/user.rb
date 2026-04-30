@@ -27,7 +27,7 @@ class User < ApplicationRecord
     allow_blank: true
 
   def profile_complete?
-    phone_number.present? && address.present? && alternate_email.present?
+    first_name.present? && last_name.present? && phone_number.present? && address.present? && alternate_email.present?
   end
 
   def soft_deleted?

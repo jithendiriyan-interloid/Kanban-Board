@@ -29,6 +29,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "shows saved profile information when profile is complete" do
     sign_in create_user(
+      first_name: "Ada",
+      last_name: "Lovelace",
       phone_number: "9876543210",
       alternate_email: "alternate@example.com",
       address: "123 Kanban Street"
@@ -38,6 +40,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_includes response.body, "Profile information"
+    assert_includes response.body, "Ada"
+    assert_includes response.body, "Lovelace"
     assert_includes response.body, "9876543210"
     assert_includes response.body, "alternate@example.com"
   end
@@ -48,6 +52,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     patch profile_path, params: {
       user: {
+        first_name: "Grace",
+        last_name: "Hopper",
         phone_number: "1234567890",
         alternate_email: "profile@example.com",
         address: "456 Board Lane"
@@ -57,6 +63,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_equal "Your profile information was saved.", flash[:notice]
     user.reload
+    assert_equal "Grace", user.first_name
+    assert_equal "Hopper", user.last_name
     assert_equal "1234567890", user.phone_number
     assert_equal "profile@example.com", user.alternate_email
     assert_equal "456 Board Lane", user.address

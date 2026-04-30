@@ -55,6 +55,8 @@ class UserTest < ActiveSupport::TestCase
 
   test "profile is complete when all profile fields are present" do
     user = build_user(
+      first_name: "Ada",
+      last_name: "Lovelace",
       phone_number: "9876543210",
       address: "123 Kanban Street",
       alternate_email: "alternate@example.com"
