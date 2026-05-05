@@ -22,9 +22,12 @@ class UsersController < ApplicationController
   end
 
   def soft_delete
-    current_user.soft_delete!
-    sign_out current_user
-    redirect_to new_user_session_path, notice: "Your account has been deleted."
+    if current_user.soft_delete!
+      sign_out current_user
+      redirect_to new_user_session_path, notice: "Your account has been deleted."
+    else
+      redirect_to root_path, alert: "Something went wrong. Please try again."
+    end
   end
 
   private

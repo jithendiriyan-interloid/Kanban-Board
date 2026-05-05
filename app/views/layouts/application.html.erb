@@ -11,6 +11,10 @@
 
     <%= yield :head %>
 
+    <% if devise_controller? %>
+      <meta name="turbo-cache-control" content="no-cache">
+    <% end %>
+
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
@@ -39,11 +43,6 @@
            data-turbo-temporary>
         <div class="font-normal"><%= message %></div>
       </div>
-    <% end %>
-
-    <% if show_app_shell %>
-      <%= render "devise/shared/navbar" %>
-      <%= render "devise/shared/sidebar" %>
     <% end %>
 
     <main id="content" class="<%= show_app_shell ? 'container mx-auto mt-28 flex px-5 transition-all duration-300' : '' %>">

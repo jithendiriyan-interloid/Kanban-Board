@@ -1,8 +1,7 @@
 <% flash.each do |type, message| %>
   <% next if message.blank? %>
   <% flash_class = type.to_s == "alert" ? "border-red-200 bg-red-50 text-red-700" : "border-green-200 bg-green-50 text-green-700" %>
-  <div id="toast-top-right"
-       class="fixed right-5 top-5 z-50 flex w-80 max-w-[calc(100vw-2.5rem)] items-center p-4 text-sm <%= flash_class %> rounded-lg shadow border transition-opacity duration-500"
+  <div id="toast-top-right" class="fixed right-5 top-5 z-50 flex w-80 max-w-[calc(100vw-2.5rem)] items-center p-4 text-sm <%= flash_class %> rounded-lg shadow border transition-opacity duration-1000"
        role="alert"
         data-controller="toast"
        data-turbo-temporary>
@@ -14,16 +13,12 @@
     <% end %>
   </div>
 <% end %>
-
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
-  <div class="grid w-full max-w-5xl overflow-hidden bg-white shadow-md rounded-lg lg:grid-cols-2 p-5">
-    <div class="p-10">
-
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-6 sm:px-6 sm:py-10 ">
+  <div class="grid w-[60%] overflow-hidden rounded-xl bg-white shadow-md sm:rounded-2xl lg:grid-cols-2">
+    <div class="px-5 py-8 sm:px-8 sm:py-10 lg:p-10">
       <h3 class="text-2xl font-semibold text-gray-800 mb-2">Hello Again!</h3>
       <p class="mb-6">Please enter your email and password to log in</p>
-
       <%= render "devise/shared/error_messages", resource: resource %>
-
       <%= form_for(resource,
             as: resource_name,
             url: session_path(resource_name),
@@ -54,7 +49,6 @@
           <% end %>
           <p id="login_email_error" class="mt-1 hidden text-xs text-red-600"></p>
         </div>
-
         <div class="mb-4" data-controller="password-visibility">
           <%= f.label :password, class: "block text-base font-medium mb-1" %>
           <div class="relative">
@@ -72,14 +66,13 @@
                   placeholder: "Password" %>
             <button type="button"
                     data-action="click->password-visibility#toggle"
-                    class="absolute right-2 top-2 transition-transform">
+              class="absolute right-2 top-2 transition-transform">
               <%= image_tag "eye-password-show.svg", alt: "Show password", class: "w-5 h-5", data: { password_visibility_target: "showIcon" } %>
               <%= image_tag "eye-password-hide.svg", alt: "Hide password", class: "w-5 h-5 hidden", data: { password_visibility_target: "hideIcon" } %>
             </button>
           </div>
           <p id="login_password_error" class="mt-1 hidden text-xs text-red-600"></p>
         </div>
-
         <% if devise_mapping.rememberable? %>
           <div class="mb-6 flex w-full items-center gap-4">
             <div class="flex items-center">
@@ -90,23 +83,19 @@
                   class: "ml-auto text-sm text-blue-600 hover:underline" %>
           </div>
         <% end %>
-
         <div class="mb-6">
           <%= f.submit "Log in", class: "w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200 font-semibold cursor-pointer" %>
         </div>
       <% end %>
-
       <div class="text-center">
         <p class="text-sm mb-2">or</p>
         <p class="text-sm">
           Don't have an account?
-          <%= link_to "Sign up", new_registration_path(resource_name), class: "text-blue-600 font-semibold hover:underline" %>
+          <%= link_to "Sign up", new_registration_path(resource_name), class: "text-blue-600 font-semibold hover:underline", data: { turbo: false } %>
         </p>
       </div>
-
     </div>
-
-    <div class="hidden min-h-[520px] bg-blue-50 lg:block">
+    <div class="hidden min-h-[420px] bg-blue-50 lg:block">
       <%= image_tag "login_image.svg", alt: "Kanban board workspace", class: "h-full w-full object-cover" %>
     </div>
   </div>

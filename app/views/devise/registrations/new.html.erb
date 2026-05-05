@@ -1,8 +1,8 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
-  <div class="grid w-full max-w-5xl overflow-hidden bg-white shadow-md rounded-lg lg:grid-cols-2 p-5">
-    <div class="p-10">
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">Create your account</h3>
-      <p class="mb-6">Fill in the details below to get started</p>
+<div class="flex min-h-screen items-center justify-center bg-gray-100 px-4 py-6 sm:px-6 sm:py-10">
+  <div class="grid w-[60%] overflow-hidden rounded-xl bg-white shadow-md sm:rounded-2xl lg:grid-cols-2">
+    <div class="px-5 py-8 sm:px-8 sm:py-10 lg:p-10">
+      <h3 class="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl">Create your account</h3>
+      <p class="mb-6 text-sm text-gray-700 sm:text-base">Fill in the details below to get started</p>
 
       <%= form_for(resource,
             as: resource_name,
@@ -17,7 +17,7 @@
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="mb-4">
-          <%= f.label :email, class: "block text-base font-medium mb-1" %>
+          <%= f.label :email, class: "mb-1 block text-sm font-medium sm:text-base" %>
           <%= f.email_field :email,
                 autofocus: true,
                 autocomplete: "email",
@@ -29,7 +29,7 @@
                   validation_type: "email",
                   validation_error_id: "signup_email_error"
                 },
-                class: "w-full px-2 h-[35px] border #{resource.errors[:email].any? ? 'border-red-400' : 'border-gray-300'} rounded-sm focus:ring-2 focus:ring-blue-500 focus:outline-none",
+                class: "h-11 w-full rounded-md border px-3 h-[35px] text-sm #{resource.errors[:email].any? ? 'border-red-400' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-base",
                 placeholder: "Email" %>
           <% if resource.errors[:email].any? %>
             <p class="mt-1 text-xs text-red-600"><%= resource.errors[:email].first %></p>
@@ -39,7 +39,7 @@
 
         <div class="mb-4" data-controller="password-visibility">
           <div class="mb-1 flex items-center justify-between">
-            <%= f.label :password, class: "block text-base font-medium" %>
+            <%= f.label :password, class: "block text-sm font-medium sm:text-base" %>
           </div>
           <div class="relative">
             <%= f.password_field :password,
@@ -54,11 +54,11 @@
                     validation_special_character: "true",
                     validation_error_id: "signup_password_error"
                   },
-                  class: "w-full px-2 h-[35px] border #{resource.errors[:password].any? ? 'border-red-400' : 'border-gray-300'} rounded-sm focus:ring-2 focus:ring-blue-500 focus:outline-none pr-10",
+                  class: "h-11 w-full rounded-md border px-3 pr-11 h-[35px] text-sm #{resource.errors[:password].any? ? 'border-red-400' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-base",
                   placeholder: "Password" %>
             <button type="button"
                     data-action="click->password-visibility#toggle"
-                    class="absolute right-2 top-2 transition-transform"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 transition-transform"
                     aria-label="Toggle password visibility">
               <%= image_tag "eye-password-show.svg", alt: "Show password", class: "w-5 h-5", data: { password_visibility_target: "showIcon" } %>
               <%= image_tag "eye-password-hide.svg", alt: "Hide password", class: "w-5 h-5 hidden", data: { password_visibility_target: "hideIcon" } %>
@@ -71,7 +71,7 @@
         </div>
 
         <div class="mb-6" data-controller="password-visibility">
-          <%= f.label :password_confirmation, class: "block text-base font-medium mb-1" %>
+          <%= f.label :password_confirmation, class: "mb-1 block text-sm font-medium sm:text-base" %>
           <div class="relative">
             <%= f.password_field :password_confirmation,
                   autocomplete: "new-password",
@@ -84,11 +84,11 @@
                     validation_match: "#user_password",
                     validation_error_id: "signup_password_confirmation_error"
                   },
-                  class: "w-full px-2 h-[35px] border #{resource.errors[:password_confirmation].any? ? 'border-red-400' : 'border-gray-300'} rounded-sm focus:ring-2 focus:ring-blue-500 focus:outline-none pr-10",
+                  class: "h-11 w-full rounded-md border px-3 h-[35px] pr-11 text-sm #{resource.errors[:password_confirmation].any? ? 'border-red-400' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-base",
                   placeholder: "Confirm password" %>
             <button type="button"
                     data-action="click->password-visibility#toggle"
-                    class="absolute right-2 top-2 transition-transform"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 transition-transform"
                     aria-label="Toggle password confirmation visibility">
               <%= image_tag "eye-password-show.svg", alt: "Show password confirmation", class: "w-5 h-5", data: { password_visibility_target: "showIcon" } %>
               <%= image_tag "eye-password-hide.svg", alt: "Hide password confirmation", class: "w-5 h-5 hidden", data: { password_visibility_target: "hideIcon" } %>
@@ -101,15 +101,15 @@
         </div>
 
         <div class="mb-6">
-          <%= f.submit "Sign up", class: "w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200 font-semibold cursor-pointer" %>
+          <%= f.submit "Sign up", class: "w-full rounded-md bg-blue-600 py-3 text-sm font-semibold text-white transition duration-200 hover:bg-blue-700 cursor-pointer sm:text-base" %>
         </div>
       <% end %>
 
       <div class="text-center">
         <p class="text-sm mb-2">or</p>
-        <p class="text-sm">
+        <p class="text-sm leading-6">
           Already have an account?
-          <%= link_to "Log in", new_session_path(resource_name), class: "text-blue-600 font-semibold hover:underline" %>
+          <%= link_to "Log in", new_session_path(resource_name), class: "text-blue-600 font-semibold hover:underline", data: { turbo: false } %>
         </p>
       </div>
     </div>
