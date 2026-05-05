@@ -78,20 +78,22 @@ export default class extends Controller {
       this.overlay.classList.remove('hidden')
     } else {
       this.overlay.classList.add('hidden')
-      this.content.classList.add('ml-64')
+      this.content.classList.add('ml-55')
     }
 
     this.isOpen = true
   }
 
   closeSidebar(force = false) {
-    if (window.innerWidth >= this.desktopBreakpoint && !force) {
-      this.content.classList.remove('ml-64')
-    }
-
     this.sidebar.classList.add('-translate-x-full')
     this.overlay.classList.add('hidden')
-    this.content.classList.remove('ml-64')
+
+    if (window.innerWidth < this.desktopBreakpoint || force) {
+      this.content.classList.remove('ml-55')
+    } else {
+      this.content.classList.add('ml-55')
+    }
+
     this.isOpen = false
   }
 
@@ -100,14 +102,9 @@ export default class extends Controller {
 
     if (window.innerWidth >= this.desktopBreakpoint) {
       this.overlay.classList.add('hidden')
-
-      if (this.isOpen) {
-        this.content.classList.add('ml-64')
-      } else {
-        this.content.classList.remove('ml-64')
-      }
+      this.content.classList.add('ml-55')
     } else if (!this.isOpen) {
-      this.content.classList.remove('ml-64')
+      this.content.classList.remove('ml-55')
     }
   }
 

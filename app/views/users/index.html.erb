@@ -1,7 +1,7 @@
 <div class="w-full">
   <div class="mb-6 flex items-center justify-between">
     <div>
-      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Welcome, <%= current_user.first_name %></p>
+      <p class="mt-1 text-sm dark:text-slate-300">Welcome, <%= current_user.first_name %></p>
     </div>
   </div>
   <% flash.each do |type, message| %>
@@ -24,33 +24,33 @@
           <% end %>
           <div class="grid gap-4 sm:grid-cols-2">
             <div class="mb-4">
-              <%= f.label :first_name, "First name", class: "mb-1 block text-base font-medium text-slate-700 dark:text-slate-200" %>
+              <%= f.label :first_name, "First name", class: "mb-1 block text-base font-medium dark:text-slate-200" %>
               <%= f.text_field :first_name, autocomplete: "given-name", class: "w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500", placeholder: "First name" %>
             </div>
             <div class="mb-4">
-              <%= f.label :last_name, "Last name", class: "mb-1 block text-base font-medium text-slate-700 dark:text-slate-200" %>
+              <%= f.label :last_name, "Last name", class: "mb-1 block text-base font-medium  dark:text-slate-200" %>
               <%= f.text_field :last_name, autocomplete: "family-name", class: "w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500", placeholder: "Last name" %>
             </div>
           </div>
           <div class="mb-4">
-            <%= f.label :phone_number, "Phone number", class: "mb-1 block text-base font-medium text-slate-700 dark:text-slate-200" %>
+            <%= f.label :phone_number, "Phone number", class: "mb-1 block text-base font-medium  dark:text-slate-200" %>
             <%= f.telephone_field :phone_number, autocomplete: "tel", class: "w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500", placeholder: "Phone number" %>
           </div>
           <div class="mb-4">
-            <%= f.label :email, "Current email", class: "mb-1 block text-base font-medium text-slate-700 dark:text-slate-200" %>
+            <%= f.label :email, "Current email", class: "mb-1 block text-base font-medium  dark:text-slate-200" %>
             <%= f.email_field :email, autocomplete: "email", disabled: true, readonly: true, class: "w-full rounded-sm border border-gray-300 bg-slate-100 px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder:text-slate-500", placeholder: "Current email" %>
           </div>
 
           <div class="mb-4">
-            <%= f.label :alternate_email, "Alternate email", class: "mb-1 block text-base font-medium text-slate-700 dark:text-slate-200" %>
+            <%= f.label :alternate_email, "Alternate email", class: "mb-1 block text-base font-medium  dark:text-slate-200" %>
             <%= f.email_field :alternate_email, autocomplete: "email", class: "w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500", placeholder: "Alternate email" %>
           </div>
           <div class="mb-4">
-            <%= f.label :avatar, class: "mb-1 block text-base font-medium text-slate-700 dark:text-slate-200" %>
-            <%= f.file_field :avatar, accept: "image/png,image/jpeg,image/webp", class: "w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-slate-900 file:mr-4 file:rounded-sm file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-700 hover:file:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:file:bg-slate-700 dark:file:text-slate-100 dark:hover:file:bg-slate-600" %>
+            <%= f.label :avatar, class: "mb-1 block text-base font-medium  dark:text-slate-200" %>
+            <%= f.file_field :avatar, accept: "image/png,image/jpeg,image/webp", class: "w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-slate-900 file:mr-4 file:rounded-sm file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium file: hover:file:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:file:bg-slate-700 dark:file:text-slate-100 dark:hover:file:bg-slate-600" %>
           </div>
           <div class="mb-6">
-            <%= f.label :address, class: "mb-1 block text-base font-medium text-slate-700 dark:text-slate-200" %>
+            <%= f.label :address, class: "mb-1 block text-base font-medium  dark:text-slate-200" %>
             <%= f.text_area :address, rows: 4, autocomplete: "street-address", class: "w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500", placeholder: "Address" %>
           </div>
           <div class="flex items-center gap-3">
@@ -71,14 +71,11 @@
           </div>
           <%= link_to "Edit", root_path(edit_profile: true), class: "rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition duration-200" %>
         </div>
-        <div class="space-y-1 text-sm text-slate-700 dark:text-slate-200">
+        <div class="space-y-1 text-sm  dark:text-slate-200">
           <div class="mb-4 flex items-center gap-4">
             <%= image_tag(current_user.avatar.attached? ? current_user.avatar : "default_avatar.jpg", alt: "Profile avatar", class: "h-24 w-24 rounded-full object-cover") %>
             <div class="flex items-center gap-3">
               <%= link_to "Update", root_path(edit_profile: true), class: "rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition duration-200" %>
-              <% if current_user.avatar.attached? %>
-                <%= button_to "Remove", remove_avatar_path, method: :delete, class: "rounded-md border border-red-300 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-50 cursor-pointer dark:border-red-800 dark:text-red-300 dark:hover:bg-red-950/40" %>
-              <% end %>
             </div>
           </div>
           <p><span class="font-semibold ">First name:</span> <%= current_user.first_name.presence || "Not added" %></p>

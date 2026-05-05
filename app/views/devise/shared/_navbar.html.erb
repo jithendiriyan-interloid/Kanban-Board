@@ -51,7 +51,6 @@
           </div>
           <ul class="p-2 text-sm text-slate-700 dark:text-slate-200">
             <li><%= link_to "Profile", root_path, class: "block rounded p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800" %></li>
-            <li><%= link_to "Settings", root_path(edit_profile: true), class: "block rounded p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800" %></li>
             <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "block rounded p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800" %></li>
           </ul>
         </div>
