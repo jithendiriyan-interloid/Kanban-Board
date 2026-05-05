@@ -1,27 +1,28 @@
 <nav class="fixed top-0 z-50 w-full bg-white shadow-sm transition-colors duration-300 dark:bg-slate-900 dark:shadow-black/20">
-  <div class="flex items-center justify-between px-10 py-2">
-    <!-- Left -->
-    <div class="flex items-center gap-3">
-      <button id="menuBtn" class="rounded-lg p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800">
+  <div class="flex flex-wrap items-center gap-3 px-3 py-3 sm:px-6 lg:flex-nowrap lg:px-10">
+    <div class="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 lg:flex-none">
+      <button id="menuBtn" type="button" class="rounded-lg p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800">
         ☰
       </button>
-      <span class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <span class="truncate text-sm font-semibold text-slate-900 sm:text-lg dark:text-slate-100">
         KanBan Board
       </span>
     </div>
-    <!-- Search -->
-    <div class="relative w-2xl">
+
+    <div class="order-3 w-full basis-full lg:order-none lg:w-auto lg:flex-1">
+      <div class="relative">
       <svg class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500 dark:text-slate-400"
         fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/>
         <path d="m21 21-4.35-4.35"/>
       </svg>
       <input type="text" placeholder="Search..."
-        class="w-full rounded-2xl border border-gray-200 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-400" />
+        class="w-[50%] rounded-2xl border border-gray-200 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-400" />
+      </div>
     </div>
-    <!-- Right -->
-    <div class="flex items-center gap-4">
-      <button class="rounded-2xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+
+    <div class="ml-auto flex items-center gap-2 sm:gap-4">
+      <button class="hidden rounded-2xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700 sm:inline-flex lg:px-5">
         Create 
       </button>
       <button id="themeToggle" type="button" aria-label="Toggle theme"
@@ -34,15 +35,16 @@
 
       <!-- Profile -->
       <div class="relative">
-        <button id="profileBtn">
+        <button id="profileBtn" type="button" class="flex max-w-[7.5rem] items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 sm:max-w-none">
           <% if current_user&.avatar&.attached? %>
             <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full object-cover" %>
           <% else %>
             <%= image_tag "default_avatar.jpg", class: "w-8 h-8 rounded-full object-cover" %>
           <% end %>
+          <span class="hidden max-w-28 truncate text-sm text-slate-700 sm:inline dark:text-slate-200"><%= current_user&.display_name %></span>
         </button>
         <div id="profileMenu"
-          class="absolute right-0 mt-2 hidden w-44 rounded-lg border border-gray-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-900">
+          class="absolute right-0 mt-2 hidden w-44 max-w-[calc(100vw-1.5rem)] rounded-lg border border-gray-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-900">
           <div class="border-b px-4 py-3 dark:border-slate-700">
             <p class="text-sm font-medium text-slate-900 dark:text-slate-100">
               <%= current_user&.display_name %>
@@ -58,6 +60,4 @@
     </div>
   </div>
 </nav>
-
-
 

@@ -82,4 +82,4 @@ gem 'devise', '~> 5.0', '>= 5.0.3'
 # For managing environment variables in development and production
 gem 'dotenv-rails'
 
-# for testing
+gem "pundit"

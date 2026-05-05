@@ -33,7 +33,7 @@
       <% next unless show_app_shell %>
       <% flash_class = type.to_s == "alert" ? "border-red-200 bg-red-50 text-red-700" : "border-green-200 bg-green-50 text-green-700" %>
       <div id="toast-top-right"
-           class="fixed right-5 top-24 z-[60] flex w-80 max-w-[calc(100vw-2.5rem)] items-center p-4 text-sm <%= flash_class %> rounded-lg shadow border transition-opacity duration-500"
+           class="fixed right-3 top-24 z-[60] flex w-80 max-w-[calc(100vw-1.5rem)] items-center p-4 text-sm <%= flash_class %> rounded-lg shadow border transition-opacity duration-500 sm:right-5 sm:max-w-[calc(100vw-2.5rem)]"
            role="alert"
            data-controller="toast"
            data-turbo-temporary>
@@ -47,7 +47,7 @@
       <div id="overlay" class="fixed inset-0 z-30 hidden bg-slate-900/50 md:hidden"></div>
     <% end %>
 
-    <main id="content" class="<%= show_app_shell ? 'container mx-auto mt-28 flex px-5 transition-all duration-300' : '' %>">
+    <main id="content" class="<%= show_app_shell ? 'mx-auto mt-36 flex w-full max-w-7xl px-3 transition-all duration-300 sm:mt-32 sm:px-4 md:mt-28 md:px-5' : '' %>">
       <%= yield %>
     </main>
   </body>
