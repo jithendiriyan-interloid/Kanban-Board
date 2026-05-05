@@ -1,6 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  static values = {
+    authPage: Boolean
+  }
+
   connect() {
     this.sidebar = document.getElementById('sidebar')
     this.overlay = document.getElementById('overlay')
@@ -109,6 +113,11 @@ export default class extends Controller {
   }
 
   setupTheme() {
+    if (this.authPageValue) {
+      this.applyAuthTheme()
+      return
+    }
+
     const savedTheme = localStorage.getItem('theme')
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     const isDark = savedTheme ? savedTheme === 'dark' : prefersDark
@@ -126,6 +135,12 @@ export default class extends Controller {
     document.documentElement.classList.toggle('dark', isDark)
     document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
     this.updateThemeToggle(isDark)
+  }
+
+  applyAuthTheme() {
+    document.documentElement.classList.remove('dark')
+    document.documentElement.style.colorScheme = 'light'
+    this.updateThemeToggle(false)
   }
 
   updateThemeToggle(isDark) {

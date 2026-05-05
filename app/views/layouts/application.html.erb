@@ -21,11 +21,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
+    <% if devise_controller? %>
+      <script>
+        document.documentElement.classList.remove("dark");
+        document.documentElement.style.colorScheme = "light";
+      </script>
+    <% end %>
+
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="m-0 p-0"  data-controller="ui">
+  <body class="m-0 p-0" data-controller="ui" data-ui-auth-page-value="<%= devise_controller? %>">
     <% show_app_shell = !devise_controller? && user_signed_in? %>
 
     <% flash.each do |type, message| %>
@@ -47,7 +54,7 @@
       <div id="overlay" class="fixed inset-0 z-30 hidden bg-slate-900/50 md:hidden"></div>
     <% end %>
 
-    <main id="content" class="<%= show_app_shell ? 'mx-auto mt-36 flex w-full max-w-7xl px-3 transition-all duration-300 sm:mt-32 sm:px-4 md:mt-28 md:px-5' : '' %>">
+    <main id="content" class="<%= show_app_shell ? 'mx-auto mt-36 flex min-w-0 w-full max-w-7xl px-3 transition-all duration-300 sm:mt-32 sm:px-4 md:mt-28 md:px-5' : '' %>">
       <%= yield %>
     </main>
   </body>
