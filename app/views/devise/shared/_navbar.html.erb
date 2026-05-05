@@ -1,24 +1,23 @@
-<nav class="fixed top-0 z-50 w-full bg-white shadow-sm">
+<nav class="fixed top-0 z-50 w-full bg-white shadow-sm transition-colors duration-300 dark:bg-slate-900 dark:shadow-black/20">
   <div class="flex items-center justify-between px-10 py-2">
     <!-- Left -->
     <div class="flex items-center gap-3">
-      <button id="menuBtn" class="p-2 rounded-lg hover:bg-gray-100">
+      <button id="menuBtn" class="rounded-lg p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800">
         ☰
       </button>
-      <span class="text-lg font-semibold">
+      <span class="text-lg font-semibold text-slate-900 dark:text-slate-100">
         KanBan Board
       </span>
     </div>
     <!-- Search -->
     <div class="relative w-2xl">
-      <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 "
+      <svg class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500 dark:text-slate-400"
         fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/>
         <path d="m21 21-4.35-4.35"/>
       </svg>
       <input type="text" placeholder="Search..."
-        class="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-2xl
-        bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        class="w-full rounded-2xl border border-gray-200 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-400" />
     </div>
     <!-- Right -->
     <div class="flex items-center gap-4">
@@ -26,12 +25,13 @@
         Create 
       </button>
       <button id="themeToggle" type="button" aria-label="Toggle theme"
-        class="group relative inline-flex h-7 w-12 items-center rounded-full bg-gray-200 p-1 transition-colors hover:bg-gray-300 focus:outline-none  focus:ring-offset-2">
+        class="group relative inline-flex h-7 w-12 items-center rounded-full bg-gray-200 p-1 transition-colors hover:bg-gray-300 focus:outline-none focus:ring-offset-2 dark:bg-slate-700 dark:hover:bg-slate-600">
         <span class="sr-only">Toggle theme</span>
         <span
-          class="inline-block h-5 w-5 rounded-full bg-white shadow transition-transform group-[.is-active]:translate-x-5">
+          class="inline-block h-5 w-5 rounded-full bg-white shadow transition-transform group-[.is-active]:translate-x-5 dark:bg-slate-200">
         </span>
       </button>
+
       <!-- Profile -->
       <div class="relative">
         <button id="profileBtn">
@@ -42,19 +42,23 @@
           <% end %>
         </button>
         <div id="profileMenu"
-          class="hidden absolute right-0 mt-2 w-44 rounded-lg shadow-lg bg-white border border-gray-200">
-          <div class="px-4 py-3 border-b">
-            <p class="text-sm font-medium">
+          class="absolute right-0 mt-2 hidden w-44 rounded-lg border border-gray-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-900">
+          <div class="border-b px-4 py-3 dark:border-slate-700">
+            <p class="text-sm font-medium text-slate-900 dark:text-slate-100">
               <%= current_user&.display_name %>
             </p>
+            
           </div>
-          <ul class="p-2 text-sm">
-            <li><%= link_to "Profile", root_path, class: "block p-2 rounded hover:bg-gray-100" %></li>
-            <li><%= link_to "Settings", root_path(edit_profile: true), class: "block p-2 rounded hover:bg-gray-100" %></li>
-            <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "block p-2 rounded hover:bg-gray-100" %></li>
+          <ul class="p-2 text-sm text-slate-700 dark:text-slate-200">
+            <li><%= link_to "Profile", root_path, class: "block rounded p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800" %></li>
+            <li><%= link_to "Settings", root_path(edit_profile: true), class: "block rounded p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800" %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "block rounded p-2 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800" %></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </nav>
+
+
+

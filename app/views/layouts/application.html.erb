@@ -44,6 +44,7 @@
     <% if show_app_shell %>
       <%= render "devise/shared/navbar" %>
       <%= render "devise/shared/sidebar" %>
+      <div id="overlay" class="fixed inset-0 z-30 hidden bg-slate-900/50 md:hidden"></div>
     <% end %>
 
     <main id="content" class="<%= show_app_shell ? 'container mx-auto mt-28 flex px-5 transition-all duration-300' : '' %>">

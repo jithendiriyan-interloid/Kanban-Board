@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   patch "profile", to: "users#update_profile", as: :profile
   post "profile/skip", to: "users#skip_profile", as: :skip_profile
   delete "profile", to: "users#soft_delete", as: :delete_profile
-
+  delete "remove_avatar", to: "users#remove_avatar"
   root "users#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

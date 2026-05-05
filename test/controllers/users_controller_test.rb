@@ -87,6 +87,22 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert user.reload.avatar.attached?
   end
 
+  test "removes the current user's avatar" do
+    user = create_user
+    user.avatar.attach(
+      io: File.open(Rails.root.join("app/assets/images/default_avatar.jpg")),
+      filename: "default_avatar.jpg",
+      content_type: "image/jpeg"
+    )
+    sign_in user
+
+    delete remove_avatar_path
+
+    assert_redirected_to root_path(edit_profile: true)
+    assert_equal "Your avatar was removed.", flash[:notice]
+    assert_not user.reload.avatar.attached?
+  end
+
   test "renders profile form again when profile data is invalid" do
     user = create_user(alternate_email: "old@example.com")
     sign_in user

@@ -16,6 +16,16 @@ export default class extends Controller {
     this.setupEvents()
   }
 
+  disconnect() {
+    this.menuButtonHandler && document.getElementById('menuBtn')?.removeEventListener('click', this.menuButtonHandler)
+    this.sidebarCloseHandler && document.getElementById('sidebarCloseBtn')?.removeEventListener('click', this.sidebarCloseHandler)
+    this.themeToggleHandler && this.themeToggle?.removeEventListener('click', this.themeToggleHandler)
+    this.profileButtonHandler && document.getElementById('profileBtn')?.removeEventListener('click', this.profileButtonHandler)
+    this.documentClickHandler && document.removeEventListener('click', this.documentClickHandler)
+    this.overlayClickHandler && this.overlay?.removeEventListener('click', this.overlayClickHandler)
+    this.resizeHandler && window.removeEventListener('resize', this.resizeHandler)
+  }
+
   setupLayout() {
     if (!this.sidebar || !this.overlay || !this.content) return
 
@@ -28,29 +38,31 @@ export default class extends Controller {
   }
 
   setupEvents() {
-    document.getElementById('menuBtn')?.addEventListener('click', () => {
-      this.toggleSidebar()
-    })
+    this.menuButtonHandler = () => this.toggleSidebar()
+    document.getElementById('menuBtn')?.addEventListener('click', this.menuButtonHandler)
 
-    document.getElementById('sidebarCloseBtn')?.addEventListener('click', () => {
-      this.closeSidebar()
-    })
+    this.sidebarCloseHandler = () => this.closeSidebar()
+    document.getElementById('sidebarCloseBtn')?.addEventListener('click', this.sidebarCloseHandler)
 
-    this.themeToggle?.addEventListener('click', () => {
-      this.toggleTheme()
-    })
+    this.themeToggleHandler = () => this.toggleTheme()
+    this.themeToggle?.addEventListener('click', this.themeToggleHandler)
 
-    document.getElementById('profileBtn')?.addEventListener('click', (e) => {
+    this.profileButtonHandler = (e) => {
       e.stopPropagation()
       this.profileMenu?.classList.toggle('hidden')
-    })
+    }
+    document.getElementById('profileBtn')?.addEventListener('click', this.profileButtonHandler)
 
-    document.addEventListener('click', () => {
+    this.documentClickHandler = () => {
       this.profileMenu?.classList.add('hidden')
-    })
+    }
+    document.addEventListener('click', this.documentClickHandler)
 
-    this.overlay?.addEventListener('click', () => this.closeSidebar())
-    window.addEventListener('resize', () => this.handleResize())
+    this.overlayClickHandler = () => this.closeSidebar()
+    this.overlay?.addEventListener('click', this.overlayClickHandler)
+
+    this.resizeHandler = () => this.handleResize()
+    window.addEventListener('resize', this.resizeHandler)
   }
 
   toggleSidebar() {
@@ -72,8 +84,11 @@ export default class extends Controller {
     this.isOpen = true
   }
 
-closeSidebar(force = false) {
-    if (window.innerWidth >= this.desktopBreakpoint && !force) return
+  closeSidebar(force = false) {
+    if (window.innerWidth >= this.desktopBreakpoint && !force) {
+      this.content.classList.remove('ml-64')
+    }
+
     this.sidebar.classList.add('-translate-x-full')
     this.overlay.classList.add('hidden')
     this.content.classList.remove('ml-64')
@@ -88,26 +103,32 @@ closeSidebar(force = false) {
 
       if (this.isOpen) {
         this.content.classList.add('ml-64')
+      } else {
+        this.content.classList.remove('ml-64')
       }
     } else if (!this.isOpen) {
       this.content.classList.remove('ml-64')
     }
   }
 
-  toggleTheme() {
-    document.documentElement.classList.toggle('dark')
+  setupTheme() {
+    const savedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isDark = savedTheme ? savedTheme === 'dark' : prefersDark
 
-    const isDark = document.documentElement.classList.contains('dark')
-    localStorage.setItem('theme', isDark ? 'dark' : 'light')
-    this.updateThemeToggle(isDark)
+    this.applyTheme(isDark)
   }
 
-  setupTheme() {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark')
-    }
+  toggleTheme() {
+    const isDark = !document.documentElement.classList.contains('dark')
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    this.applyTheme(isDark)
+  }
 
-    this.updateThemeToggle(document.documentElement.classList.contains('dark'))
+  applyTheme(isDark) {
+    document.documentElement.classList.toggle('dark', isDark)
+    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
+    this.updateThemeToggle(isDark)
   }
 
   updateThemeToggle(isDark) {

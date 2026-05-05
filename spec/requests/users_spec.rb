@@ -71,6 +71,24 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "DELETE /remove_avatar" do
+    it "removes the current user's avatar" do
+      user = create(:user)
+      user.avatar.attach(
+        io: File.open(Rails.root.join("app/assets/images/default_avatar.jpg")),
+        filename: "default_avatar.jpg",
+        content_type: "image/jpeg"
+      )
+      sign_in user
+
+      delete remove_avatar_path
+
+      expect(response).to redirect_to(root_path(edit_profile: true))
+      expect(flash[:notice]).to eq("Your avatar was removed.")
+      expect(user.reload.avatar).not_to be_attached
+    end
+  end
+
   describe "POST /profile/skip" do
     it "skips the profile form for the session" do
       user = create(:user)

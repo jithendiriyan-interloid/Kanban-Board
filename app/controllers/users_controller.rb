@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     redirect_to new_user_session_path, notice: "Your account has been deleted."
   end
 
+  def remove_avatar
+    current_user.avatar.purge_later if current_user.avatar.attached?
+    redirect_to root_path(edit_profile: true), notice: "Your avatar was removed."
+  end
+
   private
 
   def profile_params
