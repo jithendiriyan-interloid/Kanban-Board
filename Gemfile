@@ -48,7 +48,7 @@ group :development, :test do
   gem "bundler-audit", require: false
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  gem "brakeman", require: true
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
@@ -57,12 +57,20 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'robocop', '~> 0.1.1'
+  gem 'rack-mini-profiler', '~> 4.0', '>= 4.0.1'
+  gem 'bullet', '~> 8.1', '>= 8.1.1'
+  gem 'traceroute', '~> 0.8.1'
+  gem 'rubycritic', '~> 5.0'
+  gem "htmlbeautifier"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'rspec-rails', '~> 7.1'
+  gem 'factory_bot_rails', '~> 6.5'
 end
 
 gem "tailwindcss-rails", "~> 4.4"
@@ -70,3 +78,8 @@ gem "tailwindcss-rails", "~> 4.4"
 # devise for authentication
 
 gem 'devise', '~> 5.0', '>= 5.0.3'
+
+# For managing environment variables in development and production
+gem 'dotenv-rails'
+
+gem "pundit"
