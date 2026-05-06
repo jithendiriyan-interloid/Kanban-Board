@@ -11,20 +11,41 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <% if devise_controller? %>
+      <meta name="turbo-cache-control" content="no-cache">
+    <% end %>
+
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="m-0 p-0">
-    <main class="<%= devise_controller? ? '' : 'container mx-auto mt-28 flex px-5' %>">
+  <body class="m-0 p-0"  data-controller="ui">
+    <% show_app_shell = !devise_controller? && user_signed_in? %>
+
+    <% flash.each do |type, message| %>
+      <% next if message.blank? %>
+      <% next unless show_app_shell %>
+      <% flash_class = type.to_s == "alert" ? "border-red-200 bg-red-50 text-red-700" : "border-green-200 bg-green-50 text-green-700" %>
+      <div id="toast-top-right"
+           class="fixed right-5 top-24 z-[60] flex w-80 max-w-[calc(100vw-2.5rem)] items-center p-4 text-sm <%= flash_class %> rounded-lg shadow border transition-opacity duration-500"
+           role="alert"
+           data-controller="toast"
+           data-turbo-temporary>
+        <div class="font-normal"><%= message %></div>
+      </div>
+    <% end %>
+
+    <main id="content" class="<%= show_app_shell ? 'container mx-auto mt-28 flex px-5 transition-all duration-300' : '' %>">
       <%= yield %>
     </main>
   </body>

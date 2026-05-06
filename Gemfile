@@ -10,9 +10,9 @@ gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# Hotwire"s SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+# Hotwire"s modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -48,7 +48,7 @@ group :development, :test do
   gem "bundler-audit", require: false
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  gem "brakeman", require: true
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
@@ -57,16 +57,26 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "rack-mini-profiler", "~> 4.0", ">= 4.0.1"
+  gem "bullet", "~> 8.1", ">= 8.1.1"
+  gem "traceroute", "~> 0.8.1"
+  gem "rubycritic", "~> 5.0"
+  gem "rubocop"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rspec-rails", "~> 7.1"
+  gem "factory_bot_rails", "~> 6.5"
 end
 
 gem "tailwindcss-rails", "~> 4.4"
 
 # devise for authentication
 
-gem 'devise', '~> 5.0', '>= 5.0.3'
+gem "devise", "~> 5.0", ">= 5.0.3"
+
+# For managing environment variables in development and production
+gem "dotenv-rails"
